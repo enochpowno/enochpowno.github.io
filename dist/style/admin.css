@@ -1,0 +1,74 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+    background-color: #341677;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, label{
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+}
+
+p {
+    text-align: justify;
+}
+
+.card * {
+    color: #212121;
+}
+
+#login{
+    position: relative;
+    background-color: #341677;
+    height: 100vh;
+    color: #212121;
+}
+
+.nav-link {
+    color: #341677;
+    margin: 0 15px;
+}
+
+.nav-pills .nav-link.active {
+    color: #ffffff;
+    background-color: #341677;
+}
+
+#loginBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#login .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+}
+
+#login button {
+    color: #ffffff;
+}
+
+#dashboard #logout {
+    color: #ffffff;
+    background-color: rgb(168, 14, 14);
+    cursor: pointer;
+}
+
+#dashboard #logout:hover {
+    background-color: rgb(182, 41, 41);
+}

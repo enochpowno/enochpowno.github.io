@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js'></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js'></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js'></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel='stylesheet'
+        href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css' />
+
+    <link rel="stylesheet" href="./dist/style/admin.css">
+</head>
+
+<body>
+    <div id="login">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>Dashboard Log In</h3>
+                    </div>
+                    <div class="card-content">
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email here..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password here..." required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                            <a href="./" class="btn btn-secondary btn-md mx-3 text-white">Go To Portfolio</a>
+                        </form>
+                        <br/>
+                        <div class="alert alert-success d-none" role="alert">
+                            Success! You've logged in!
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert">
+                            Uh oh! Better check your email or password! I can't let you login :<
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loginBackground"></div>
+    </div>
+    
+    <div id="dashboard" class="d-none">
+        <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false" style="position: absolute; top: 10px; right: 10px;">
+            <div class="toast-header">
+                <strong class="mr-auto">Alert!</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                
+            </div>
+        </div>
+
+        <div class="container-fluid mt-5">
+            <ul class="nav nav-pills mb-3 justify-content-center" id="edit-tab" role="tablist">
+                <li class="nav-item mt-2">
+                    <a class="nav-link active" id="edit-intro-tab" data-toggle="pill" href="#edit-intro" role="tab"
+                        aria-controls="edit-intro" aria-selected="true">Introduction</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="edit-education-tab" data-toggle="pill" href="#edit-education" role="tab"
+                        aria-controls="edit-education" aria-selected="false">Education</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="edit-organization-tab" data-toggle="pill" href="#edit-organization"
+                        role="tab" aria-controls="edit-organization" aria-selected="false">Organizations</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="edit-works-tab" data-toggle="pill" href="#edit-works" role="tab"
+                        aria-controls="edit-works" aria-selected="false">Works</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="edit-contact-tab" data-toggle="pill" href="#edit-contact" role="tab"
+                        aria-controls="edit-contact" aria-selected="false">Contact</a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link" id="logout">Log Out</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="edit-tabContent">
+                <div class="tab-pane fade show active" id="edit-intro" role="tabpanel" aria-labelledby="edit-intro-tab">
+                    <form id="introduction" class="container">
+                        <div class="row col mt-5" style="text-align: center">
+                            <h2>Adjust Introduction</h2>
+                        </div>
+     
+                        <div class="row col mt-3">
+                            <i>Note: Remember to place the http:// or https:// before your image links. Example: https://via.placeholder.com/300</i>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Full Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Enter your name here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Photo URL:</label>
+                                        <input type="text" class="form-control" id="url" name="url"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"  placeholder="Enter your profile photo url here..." required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label for="content">Introduction Content:</label>
+                                    <textarea class="form-control" id="content" rows="5" name="content" 
+                                        placeholder="Enter your introduction here..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-sm btn-success">Update Introduction</button>
+                                <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="alert d-none alert-success" role="alert">
+                                    Success! You've changed your introduction!
+                                </div>
+                                <div class="alert d-none alert-danger" role="alert">
+                                    Uh oh! Better check your input! I can't let you update your introduction.</div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="tab-pane fade" id="edit-education" role="tabpanel" aria-labelledby="edit-education-tab">
+                    <form id="education" class="container">
+                        <div class="row col mt-5" style="text-align: center">
+                            <h2>Adjust Educational Background</h2>
+                        </div>
+                        
+                        <div class="row col mt-3">
+                            <i>Note: Remember to place the http:// or https:// before your image links. Example: https://via.placeholder.com/300</i>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">School Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Enter the school name here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Sample Image:</label>
+                                        <input type="text" class="form-control" id="url" name="url"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"  placeholder="Enter your sample image url here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Years Attended:</label>
+                                        <input type="text" class="form-control" id="years" name="years"
+                                            placeholder="Enter year/s attended here..." required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label for="content">Education Overview:</label>
+                                    <textarea class="form-control" id="content" rows="5" name="content" 
+                                        placeholder="Enter your overview here..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-sm btn-success">Add Education</button>
+                                <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="alert d-none alert-success" role="alert">
+                                    Success! You've added to your educational background!
+                                </div>
+                                <div class="alert d-none alert-danger" role="alert">
+                                    Uh oh! Better check your input! I can't let you add that to your educational background.</div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>School</th>
+                                                <th>Year/s Attended</th>
+                                                <th>Image</th>
+                                                <th>Overview</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="edit-organization" role="tabpanel" aria-labelledby="edit-organization-tab">
+                    <form id="organization" class="container">
+                        <div class="row col mt-5" style="text-align: center">
+                            <h2>Adjust Organization Background</h2>
+                        </div>
+
+                        <div class="row col mt-3">
+                            <i>Note: Remember to place the http:// or https:// before your image links. Example: https://via.placeholder.com/300</i>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Organization:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Enter the organization name here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Sample Image:</label>
+                                        <input type="text" class="form-control" id="url" name="url"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"  placeholder="Enter your sample image url here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Year/s Occupied:</label>
+                                        <input type="text" class="form-control" id="years" name="years"
+                                            placeholder="Enter year/s joined here..." required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label for="content">Overview:</label>
+                                    <textarea class="form-control" id="content" rows="5" name="content" 
+                                        placeholder="Enter your overview here..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-sm btn-success">Add Organization</button>
+                                <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="alert d-none alert-success" role="alert">
+                                    Success! You've added to your organizations!
+                                </div>
+                                <div class="alert d-none alert-danger" role="alert">
+                                    Uh oh! Better check your input! I can't let you add that to your organizations.</div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Year/s</th>
+                                                <th>Image</th>
+                                                <th>Overview</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="edit-works" role="tabpanel" aria-labelledby="edit-works-tab">
+                    <form id="work" class="container">
+                        <div class="row col mt-5" style="text-align: center">
+                            <h2>Adjust Work Background</h2>
+                        </div>
+                        
+                        <div class="row col mt-3">
+                            <i>Note: Remember to place the http:// or https:// before your image links. Example: https://via.placeholder.com/300</i>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mt-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Title:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Enter the work name here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Sample Image:</label>
+                                        <input type="text" class="form-control" id="url" name="url"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"  placeholder="Enter your sample image url here..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="url">Year/s Occupied/Performed:</label>
+                                        <input type="text" class="form-control" id="years" name="years"
+                                            placeholder="Enter year/s occupied/performed here..." required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label for="content">Overview:</label>
+                                    <textarea class="form-control" id="content" rows="5" name="content" 
+                                        placeholder="Enter your overview here..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-sm btn-success">Add Work</button>
+                                <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="alert d-none alert-success" role="alert">
+                                    Success! You've added to your works!
+                                </div>
+                                <div class="alert d-none alert-danger" role="alert">
+                                    Uh oh! Better check your input! I can't let you add that to your works.</div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Year/s</th>
+                                                <th>Image</th>
+                                                <th>Overview</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="edit-contact" role="tabpanel" aria-labelledby="edit-contact-tab">
+                    <form id="contacts" class="container">
+                        <div class="row col mt-5" style="text-align: center">
+                            <h2>Adjust Contact Links</h2>
+                        </div>
+
+                        <div class="row col mt-3">
+                            <i>Note: Remember to place the http:// or https:// before your contact links. Example: https//www.facebook.com/</i>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mt-3">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Facebook:</label>
+                                        <input type="text" class="form-control" id="facebook" name="facebook"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Twitter:</label>
+                                        <input type="text" class="form-control" id="twitter" name="twitter"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Github:</label>
+                                        <input type="text" class="form-control" id="github" name="github"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-sm btn-success">Update Contacts</button>
+                                        <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">LinkedIn:</label>
+                                        <input type="text" class="form-control" id="linkedin" name="linkedin"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Instagram:</label>
+                                        <input type="text" class="form-control" id="instagram" name="instagram"
+                                            pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="name">Email:</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="Enter your link here...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dist/js/admin.js"></script>
+</body>
+
+</html>

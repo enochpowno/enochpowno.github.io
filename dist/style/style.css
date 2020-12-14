@@ -1,0 +1,291 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #341677;
+}
+
+.navbar {
+    background-color: #341677;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+}
+
+p {
+    text-align: justify;
+}
+
+.card * {
+    color: #212121;
+}
+
+#navbar li a {
+    padding: 10px 25px;
+    height: 100%;
+    border-radius: 3px;
+    transition: background-color ease-in-out 175ms;
+}
+
+#navbar li:not(:first-child) {
+    margin-left: 25px;
+}
+
+@media screen and (max-width: 768px) {
+    #navbar li:not(:first-child) {
+        margin-left: 0;
+    }
+
+    #navbar li:first-child {
+        margin-top: 10px;
+    }
+}
+
+#navbar li a {
+    color: #ffffff;
+}
+
+#navbar li.active a {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#navbar li:hover a {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+#introduction, #contacts {
+    position: relative;
+    background-color: #341677;
+    height: calc(100vh - 60px);
+    color: #ffffff;
+}
+
+#contacts {
+    height: 100vh;
+    box-shadow: inset 0 -10px 100px rgba(0, 0, 0, 0.75);
+}
+
+#introductionBackground, #contactsBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#introduction .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+#introduction p,
+#introduction h4 {
+    padding: 0 25px;
+}
+
+#introduction .container div:first-child {
+    text-align: center;
+}
+
+#introduction img {
+    height: 300px;
+    width: 300px;
+    border-radius: 150px;
+}
+
+#education {
+    min-height: 50vh;
+    padding: 50px 0;
+    background-color: #9d0191;
+    color: #ffffff;
+}
+
+#education .container h1 {
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #fecd1a, 4px 4px #000;
+}
+
+#education #educationDetails > .col > .row {
+    align-items: center;
+}
+
+#education #educationDetails > .col > .row div:first-child {
+    text-align: center;
+}
+
+#education #educationDetails>.col>.row div img {
+    border-radius: 75px;
+    height: 150px;
+    width: 150px;
+    border: 5px solid #fff;
+}
+
+#organizations {
+    min-height: 50vh;
+    padding: 50px 0;
+    background-color: #fecd1a;
+    color: #ffffff;
+}
+
+#organizations .container h1 {
+    color: #3fc5f0;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #9d0191,
+    4px 4px #000;
+}
+
+#works {
+    min-height: 50vh;
+    padding: 50px 0;
+    background-color: #1e2a78;
+    color: #ffffff;
+}
+
+#works .container h1 {
+    color: #ff008b;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #fecd1a,
+    4px 4px #7c203a;
+}
+
+#works .card {
+    cursor: pointer;
+}
+
+#contacts .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 999;
+}
+
+#contacts .container a {
+    font-size: 48px;
+    position: relative;
+}
+
+#contacts .container a#facebook:not([disabled=disabled]):hover {
+    color: #5d8ae6;
+}
+
+#contacts .container a#twitter:not([disabled=disabled]):hover {
+    color: #1DA1F2;
+}
+
+#contacts .container a#github:not([disabled=disabled]):hover {
+    color: #969696;
+}
+
+#contacts .container a#linkedin:not([disabled=disabled]):hover {
+    color: #0077b5;
+}
+
+#contacts .container a#instagram:not([disabled=disabled]):hover {
+    color: #E1306C;
+}
+
+#contacts .container a#email:not([disabled=disabled]):hover {
+    color: #F77737;
+}
+
+#contacts .container a#facebook:not([disabled=disabled]):hover::after {
+    content: 'FACEBOOK';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a#twitter:not([disabled=disabled]):hover::after {
+    content: 'TWITTER';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a#github:not([disabled=disabled]):hover::after {
+    content: 'GITHUB';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a#linkedin:not([disabled=disabled]):hover::after {
+    content: 'LINKEDIN';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a#instagram:not([disabled=disabled]):hover::after {
+    content: 'INSTAGRAM';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a#email:not([disabled=disabled]):hover::after {
+    content: 'MAIL';
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    top: -20px;
+    font-weight: bold;
+    font-family: 'Nunito';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contacts .container a:not([disabled=disabled]) {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#contacts .container a[disabled=disabled] {
+    color: #ccc;
+    cursor: default;
+}
